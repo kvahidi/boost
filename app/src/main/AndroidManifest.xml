@@ -12,9 +12,13 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"
-                />
+                android:resource="@xml/file_paths" />
         </provider>
+
+        <meta-data
+            android:name="com.snapchat.kit.sdk.clientId"
+            android:value="38e4f7ae-eded-4590-864c-b52ec4423635" />
+        android:allowBackup="true"
         <meta-data android:name="com.snapchat.kit.sdk.clientId" android:value="38e4f7ae-eded-4590-864c-b52ec4423635" />
         <meta-data android:name="com.snapchat.kit.sdk.redirectUrl" android:value="boost://abc/xy/z" />
         <meta-data android:name="com.snapchat.kit.sdk.scopes" android:resource="@array/snap_connect_scopes" /> <!-- This should be a string array of scopes !-->
@@ -41,6 +45,7 @@
                     />
             </intent-filter>
         </activity>
+        <activity android:name=".CreateQuestActivity"></activity>
     </application>
 
 </manifest>
