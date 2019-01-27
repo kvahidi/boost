@@ -67,6 +67,7 @@ public class CreateQuestActivity extends Activity {
         snapSticker.setPosY(0.5f);
         // sets the sticker on the live camera feed
         snapLiveCameraContent.setSnapSticker(snapSticker);
+        snapLiveCameraContent.setAttachmentUrl("boost://main");
         snapLiveCameraContent.setCaptionText("testing!!!");
         // launches snapchat with the live feed + sticker
         snapCreativeKitApi.send(snapLiveCameraContent);
