@@ -10,6 +10,7 @@ import com.snapchat.kit.sdk.creative.exceptions.SnapStickerSizeException;
 import com.snapchat.kit.sdk.creative.media.SnapMediaFactory;
 import com.snapchat.kit.sdk.creative.media.SnapSticker;
 import com.snapchat.kit.sdk.creative.models.SnapContent;
+import com.snapchat.kit.sdk.creative.models.SnapLiveCameraContent;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,14 +27,22 @@ public class CreateQuestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_quest);
         snapCreativeKitApi = SnapCreative.getApi(this);
-
+        sendStickerSnap(createSticker());
     }
 
-    private void sendStickerSnap(){
+    private void sendStickerSnap(SnapSticker snapSticker){
+        SnapLiveCameraContent snapLiveCameraContent = new SnapLiveCameraContent();
 
+        snapSticker.setWidth(300);
+        snapSticker.setHeight(300);
+
+        snapSticker.setPosX(0.5f);
+        snapSticker.setPosY(0.5f);
+        snapLiveCameraContent.setSnapSticker(snapSticker);
+        snapCreativeKitApi.send(snapLiveCameraContent);
     }
 
-    private void createSticker(){
+    private SnapSticker createSticker(){
         SnapMediaFactory snapMediaFactory = SnapCreative.getMediaFactory(this);
         SnapSticker sticker = null;
         try{
@@ -43,8 +52,7 @@ public class CreateQuestActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //snapCreativeKitApi.send(sticker);
-
+        return sticker;
     }
 
     private File getStickerFromDrawable() throws IOException {
