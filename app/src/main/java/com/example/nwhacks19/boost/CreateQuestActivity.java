@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.snapchat.kit.sdk.SnapCreative;
 import com.snapchat.kit.sdk.creative.api.SnapCreativeKitApi;
@@ -32,7 +33,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URI;
+import java.net.URL;
 
 import static java.security.AccessController.getContext;
 
@@ -62,43 +67,61 @@ public class CreateQuestActivity extends Activity implements SnapCreativeKitComp
         // gets live camera feed ready
         SnapLiveCameraContent snapLiveCameraContent = new SnapLiveCameraContent();
 
-        snapSticker.setWidth(200);
+/*        snapSticker.setWidth(200);
         snapSticker.setHeight(200);
 
         snapSticker.setPosX(0.5f);
-        snapSticker.setPosY(0.5f);
+        snapSticker.setPosY(0.5f);*/
         // sets the sticker on the live camera feed
-        snapLiveCameraContent.setSnapSticker(snapSticker);
-        snapLiveCameraContent.setAttachmentUrl("https://snapcore.azurewebsites.net/api/ModifyCounter?code=9K2tpB3lgRHcdLtR5fJBcajFGLgjydwaaSCwLAP4R4Vb9/dK7fILmQ==&userName=Judy&questId=51");
-        snapLiveCameraContent.setCaptionText("Jump off a cliff!");
+        //snapLiveCameraContent.setSnapSticker(snapSticker);
+        String questText =( (EditText) findViewById(R.id.editText)).getText().toString();
+        Log.d("debugtest", "QUESTTEXT IS " + questText);
+        snapLiveCameraContent.setAttachmentUrl("https://snapcore.azurewebsites.net/api/ModifyCounter?code=9K2tpB3lgRHcdLtR5fJBcajFGLgjydwaaSCwLAP4R4Vb9/dK7fILmQ==&questMessage=" + questText  + "&questId=51");
+        snapLiveCameraContent.setCaptionText(questText + " Sent: " + getCountFromDatabase() + " times!");
         // launches snapchat with the live feed + sticker
         snapCreativeKitApi.sendWithCompletionHandler(snapLiveCameraContent, CreateQuestActivity.this);
     }
 
-    private SnapSticker createSticker(){
+    private String getQuestText() {
+        return null;
+    }
+
+    private int getCountFromDatabase() {
+//        int returnInt = 0;
+//        String urlLink = "http://www.signasl.org/sign/" + word;
+//        URL url;
+//        try {
+//            url = new URL(urlLink);
+//            Log.d("ocr", "Opening url connection " + urlLink);
+//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//            connection.setRequestMethod("GET");
+//
+//            BufferedReader httpInput = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+//            StringBuffer stringBuffer = new StringBuffer();
+//            String inputLine, video = "";
+//            while ((inputLine = httpInput.readLine()) != null) {
+//                returnInt = Integer.parseInt(inputLine);
+//            }
+//            httpInput.close();
+//        } catch (ProtocolException e) {
+//            e.printStackTrace();
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return returnInt;
+        return 3;
+    }
+
+        private SnapSticker createSticker(){
         // gets factory class to create SnapSticker
         SnapMediaFactory snapMediaFactory = SnapCreative.getMediaFactory(this);
         SnapSticker sticker = null;
-        try{
-            // creates sticker from file ( i made a quick one and put it under the raw res folder)
-//
             Log.d("AAAGH", this.getFilesDir().toString());
-            File downloadDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-            File[] listOfFiles = downloadDir.listFiles();
-            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "purple-square-9.png");
 
-
-
-//            Uri path = Uri.parse("android.resource://" + this.getPackageName() + "/raw/stickerbg");
-//            File stickerFile = new File(URI.create(path.getPath()));
-//            File stickerFile = new File(Uri.parse("android.resource://" + this.getPackageName() + "/raw/stickerbg.png").getPath());
-            sticker = snapMediaFactory.getSnapStickerFromFile(file);
-        } catch (SnapStickerSizeException e) {
-            e.printStackTrace();
-        } /*catch (IOException e) {
-            e.printStackTrace();*
-        }*/
         return sticker;    }
+
 
     private File getStickerFromDrawable() throws IOException {
         InputStream ins = getResources().openRawResource(R.raw.stickerbg);
@@ -115,6 +138,19 @@ public class CreateQuestActivity extends Activity implements SnapCreativeKitComp
 
     @Override
     public void onSendSuccess() {
+        String urlLink = "https://snapcore.azurewebsites.net/api/ModifyCounter?code=9K2tpB3lgRHcdLtR5fJBcajFGLgjydwaaSCwLAP4R4Vb9/dK7fILmQ==&userName=" + ((EditText)findViewById(R.id.editText)).getText().toString() + "&questId=51";
+        URL url;
+        try {
+            url = new URL(urlLink);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        }
+         catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } {
+
+        }
         Log.d("AAH", "snnap sent");
     }
 

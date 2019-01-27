@@ -13,4 +13,13 @@
         android:text="Button"
         tools:layout_editor_absoluteX="122dp"
         tools:layout_editor_absoluteY="205dp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="72dp"
+        tools:layout_editor_absoluteY="128dp" />
 </android.support.constraint.ConstraintLayout>
