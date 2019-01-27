@@ -87,31 +87,30 @@ public class CreateQuestActivity extends Activity implements SnapCreativeKitComp
     }
 
     private int getCountFromDatabase() {
-//        int returnInt = 0;
-//        String urlLink = "http://www.signasl.org/sign/" + word;
-//        URL url;
-//        try {
-//            url = new URL(urlLink);
-//            Log.d("ocr", "Opening url connection " + urlLink);
-//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//            connection.setRequestMethod("GET");
-//
-//            BufferedReader httpInput = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-//            StringBuffer stringBuffer = new StringBuffer();
-//            String inputLine, video = "";
-//            while ((inputLine = httpInput.readLine()) != null) {
-//                returnInt = Integer.parseInt(inputLine);
-//            }
-//            httpInput.close();
-//        } catch (ProtocolException e) {
-//            e.printStackTrace();
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return returnInt;
-        return 3;
+        int returnInt = 0;
+        String urlLink = "http://www.signasl.org/sign/" + word;
+        URL url;
+        try {
+            url = new URL(urlLink);
+            Log.d("ocr", "Opening url connection " + urlLink);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            BufferedReader httpInput = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            StringBuffer stringBuffer = new StringBuffer();
+            String inputLine, video = "";
+            while ((inputLine = httpInput.readLine()) != null) {
+                returnInt = Integer.parseInt(inputLine);
+            }
+            httpInput.close();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnInt;
     }
 
         private SnapSticker createSticker(){
