@@ -60,13 +60,14 @@ public class CreateQuestActivity extends Activity {
         // gets live camera feed ready
         SnapLiveCameraContent snapLiveCameraContent = new SnapLiveCameraContent();
 
-        snapSticker.setWidth(300);
-        snapSticker.setHeight(300);
+        snapSticker.setWidth(200);
+        snapSticker.setHeight(200);
 
         snapSticker.setPosX(0.5f);
         snapSticker.setPosY(0.5f);
         // sets the sticker on the live camera feed
         snapLiveCameraContent.setSnapSticker(snapSticker);
+        snapLiveCameraContent.setCaptionText("testing!!!");
         // launches snapchat with the live feed + sticker
         snapCreativeKitApi.send(snapLiveCameraContent);
     }
@@ -81,7 +82,7 @@ public class CreateQuestActivity extends Activity {
             Log.d("AAAGH", this.getFilesDir().toString());
             File downloadDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
             File[] listOfFiles = downloadDir.listFiles();
-            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "Dx75nhcUYAAvouP.jpeg");
+            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "purple-square-9.png");
 
 
 
