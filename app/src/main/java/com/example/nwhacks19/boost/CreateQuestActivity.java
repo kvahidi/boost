@@ -22,15 +22,18 @@ public class CreateQuestActivity extends AppCompatActivity {
 
     private SnapCreativeKitApi snapCreativeKitApi;
 
+    //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_quest);
+        // gets API to use
         snapCreativeKitApi = SnapCreative.getApi(this);
         sendStickerSnap(createSticker());
     }
 
     private void sendStickerSnap(SnapSticker snapSticker){
+        // gets live camera feed ready
         SnapLiveCameraContent snapLiveCameraContent = new SnapLiveCameraContent();
 
         snapSticker.setWidth(300);
@@ -38,14 +41,18 @@ public class CreateQuestActivity extends AppCompatActivity {
 
         snapSticker.setPosX(0.5f);
         snapSticker.setPosY(0.5f);
+        // sets the sticker on the live camera feed
         snapLiveCameraContent.setSnapSticker(snapSticker);
+        // launches snapchat with the live feed + sticker
         snapCreativeKitApi.send(snapLiveCameraContent);
     }
 
     private SnapSticker createSticker(){
+        // gets factory class to create SnapSticker
         SnapMediaFactory snapMediaFactory = SnapCreative.getMediaFactory(this);
         SnapSticker sticker = null;
         try{
+            // creates sticker from file ( i made a quick one and put it under the raw res folder)
             sticker = snapMediaFactory.getSnapStickerFromFile(getStickerFromDrawable());
         } catch (SnapStickerSizeException e) {
             e.printStackTrace();

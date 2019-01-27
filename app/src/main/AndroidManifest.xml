@@ -6,8 +6,8 @@
 
     <application>
         <provider
-            android:authorities="${applicationId}.fileprovider"
             android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -19,9 +19,15 @@
             android:name="com.snapchat.kit.sdk.clientId"
             android:value="38e4f7ae-eded-4590-864c-b52ec4423635" />
         android:allowBackup="true"
-        <meta-data android:name="com.snapchat.kit.sdk.clientId" android:value="38e4f7ae-eded-4590-864c-b52ec4423635" />
-        <meta-data android:name="com.snapchat.kit.sdk.redirectUrl" android:value="boost://abc/xy/z" />
-        <meta-data android:name="com.snapchat.kit.sdk.scopes" android:resource="@array/snap_connect_scopes" /> <!-- This should be a string array of scopes !-->
+        <meta-data
+            android:name="com.snapchat.kit.sdk.clientId"
+            android:value="38e4f7ae-eded-4590-864c-b52ec4423635" />
+        <meta-data
+            android:name="com.snapchat.kit.sdk.redirectUrl"
+            android:value="boost://abc/xy/z" />
+        <meta-data
+            android:name="com.snapchat.kit.sdk.scopes"
+            android:resource="@array/snap_connect_scopes" /> <!-- This should be a string array of scopes ! -->
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -30,22 +36,24 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTask"
             android:label="@string/app_name"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.LAUNCHER" />
+
                 <data
-                    android:scheme="boost"
                     android:host="abc"
                     android:path="/xy/z"
-                    />
+                    android:scheme="boost" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateQuestActivity"></activity>
+        <activity android:name=".CreateQuestActivity" />
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>
