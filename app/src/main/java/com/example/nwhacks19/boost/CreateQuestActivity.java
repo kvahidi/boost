@@ -16,6 +16,8 @@ import android.widget.Button;
 
 import com.snapchat.kit.sdk.SnapCreative;
 import com.snapchat.kit.sdk.creative.api.SnapCreativeKitApi;
+import com.snapchat.kit.sdk.creative.api.SnapCreativeKitCompletionCallback;
+import com.snapchat.kit.sdk.creative.api.SnapCreativeKitSendError;
 import com.snapchat.kit.sdk.creative.exceptions.SnapStickerSizeException;
 import com.snapchat.kit.sdk.creative.media.SnapMediaFactory;
 import com.snapchat.kit.sdk.creative.media.SnapSticker;
@@ -34,7 +36,7 @@ import java.net.URI;
 
 import static java.security.AccessController.getContext;
 
-public class CreateQuestActivity extends Activity {
+public class CreateQuestActivity extends Activity implements SnapCreativeKitCompletionCallback {
 
     private SnapCreativeKitApi snapCreativeKitApi;
 
@@ -67,10 +69,10 @@ public class CreateQuestActivity extends Activity {
         snapSticker.setPosY(0.5f);
         // sets the sticker on the live camera feed
         snapLiveCameraContent.setSnapSticker(snapSticker);
-        snapLiveCameraContent.setAttachmentUrl("boost://main");
-        snapLiveCameraContent.setCaptionText("testing!!!");
+        snapLiveCameraContent.setAttachmentUrl("https://snapcore.azurewebsites.net/api/ModifyCounter?code=9K2tpB3lgRHcdLtR5fJBcajFGLgjydwaaSCwLAP4R4Vb9/dK7fILmQ==&userName=Judy&questId=51");
+        snapLiveCameraContent.setCaptionText("Jump off a cliff!");
         // launches snapchat with the live feed + sticker
-        snapCreativeKitApi.send(snapLiveCameraContent);
+        snapCreativeKitApi.sendWithCompletionHandler(snapLiveCameraContent, CreateQuestActivity.this);
     }
 
     private SnapSticker createSticker(){
@@ -109,5 +111,15 @@ public class CreateQuestActivity extends Activity {
 
         File f = new File(sb.toString());
         return f;
+    }
+
+    @Override
+    public void onSendSuccess() {
+        Log.d("AAH", "snnap sent");
+    }
+
+    @Override
+    public void onSendFailed(SnapCreativeKitSendError snapCreativeKitSendError) {
+
     }
 }
