@@ -3,6 +3,9 @@
 buildscript {
     
     repositories {
+        maven {
+            url "https://storage.googleapis.com/snap-kit-build/maven"
+        }
         google()
         jcenter()
     }
@@ -17,6 +20,9 @@ buildscript {
 
 allprojects {
     repositories {
+        maven {
+            url "https://storage.googleapis.com/snap-kit-build/maven"
+        }
         google()
         jcenter()
     }

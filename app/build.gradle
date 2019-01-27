@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.nwhacks19.boost"
-        minSdkVersion 14
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -26,4 +26,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation([
+            'com.snapchat.kit.sdk:bitmoji:1.1.4', // for Bitmoji Kit
+            'com.snapchat.kit.sdk:login:1.1.4', // for Login Kit
+            'com.snapchat.kit.sdk:creative:1.1.4', // for Creative Kit
+            'com.snapchat.kit.sdk:core:1.1.4',  // core dependency for all of the above Kits
+    ])
 }
