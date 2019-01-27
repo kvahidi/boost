@@ -1,8 +1,18 @@
 package com.example.nwhacks19.boost;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.snapchat.kit.sdk.SnapCreative;
 import com.snapchat.kit.sdk.creative.api.SnapCreativeKitApi;
@@ -14,11 +24,17 @@ import com.snapchat.kit.sdk.creative.models.SnapLiveCameraContent;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.URI;
 
-public class CreateQuestActivity extends AppCompatActivity {
+import static java.security.AccessController.getContext;
+
+public class CreateQuestActivity extends Activity {
 
     private SnapCreativeKitApi snapCreativeKitApi;
 
@@ -29,7 +45,15 @@ public class CreateQuestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_quest);
         // gets API to use
         snapCreativeKitApi = SnapCreative.getApi(this);
-        sendStickerSnap(createSticker());
+
+        Button btn = (Button) findViewById(R.id.button2);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendStickerSnap(createSticker());
+
+            }
+        });
     }
 
     private void sendStickerSnap(SnapSticker snapSticker){
@@ -53,14 +77,24 @@ public class CreateQuestActivity extends AppCompatActivity {
         SnapSticker sticker = null;
         try{
             // creates sticker from file ( i made a quick one and put it under the raw res folder)
-            sticker = snapMediaFactory.getSnapStickerFromFile(getStickerFromDrawable());
+//
+            Log.d("AAAGH", this.getFilesDir().toString());
+            File downloadDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+            File[] listOfFiles = downloadDir.listFiles();
+            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "Dx75nhcUYAAvouP.jpeg");
+
+
+
+//            Uri path = Uri.parse("android.resource://" + this.getPackageName() + "/raw/stickerbg");
+//            File stickerFile = new File(URI.create(path.getPath()));
+//            File stickerFile = new File(Uri.parse("android.resource://" + this.getPackageName() + "/raw/stickerbg.png").getPath());
+            sticker = snapMediaFactory.getSnapStickerFromFile(file);
         } catch (SnapStickerSizeException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return sticker;
-    }
+        } /*catch (IOException e) {
+            e.printStackTrace();*
+        }*/
+        return sticker;    }
 
     private File getStickerFromDrawable() throws IOException {
         InputStream ins = getResources().openRawResource(R.raw.stickerbg);

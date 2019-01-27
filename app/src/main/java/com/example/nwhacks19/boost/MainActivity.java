@@ -1,9 +1,11 @@
 package com.example.nwhacks19.boost;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -54,20 +56,14 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 SnapLogin.getAuthTokenManager(MainActivity.this).startTokenGrant();
-                Button button = (Button) findViewById(R.id.button);
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        launchCreateActivity();
-                    }
-                });
-                SnapLogin.getLoginStateController(MainActivity.this).addOnLoginStateChangedListener(mLoginStateChangedListener);
-                boolean isUserLoggedIn = SnapLogin.isUserLoggedIn(MainActivity.this);
-                if (isUserLoggedIn) {
-                    System.out.println("Logged in");
-                }
+            }
+        });
+        SnapLogin.getLoginStateController(this).addOnLoginStateChangedListener(mLoginStateChangedListener);
+        boolean isUserLoggedIn = SnapLogin.isUserLoggedIn(this);
+        if (isUserLoggedIn) {
+            System.out.println("Logged in");
+        }
 
-            }});
 
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -76,11 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 launchCreateActivity();
             }
         });
-        SnapLogin.getLoginStateController(this).addOnLoginStateChangedListener(mLoginStateChangedListener);
-        boolean isUserLoggedIn = SnapLogin.isUserLoggedIn(this);
-        if (isUserLoggedIn) {
-            System.out.println("Logged in");
-        }
 
         setupSnapKitAPI();
 

@@ -3,6 +3,10 @@
     package="com.example.nwhacks19.boost">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
     <application>
         <provider
@@ -15,10 +19,6 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <meta-data
-            android:name="com.snapchat.kit.sdk.clientId"
-            android:value="38e4f7ae-eded-4590-864c-b52ec4423635" />
-        android:allowBackup="true"
         <meta-data
             android:name="com.snapchat.kit.sdk.clientId"
             android:value="38e4f7ae-eded-4590-864c-b52ec4423635" />
